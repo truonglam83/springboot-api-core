@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
         name = "enabled",
         havingValue = "true"
 )
-@MapperScan("com.api.schoollmsapi")
+@MapperScan("com.api.coreapi")
 public class MyBatisConfig {
     private final SqlLogProperties sqlLogProperties;
 

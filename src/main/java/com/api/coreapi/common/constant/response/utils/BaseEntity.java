@@ -2,13 +2,13 @@ package com.api.coreapi.common.constant.response.utils;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Data
 public abstract class BaseEntity {
-    private LocalDateTime createdAt;
+    private Instant createdAt;
 
-    private LocalDateTime updatedAt;
+    private Instant updatedAt;
 
     private String createdBy;
 

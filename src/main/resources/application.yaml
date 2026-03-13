@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: coreapi
+
+  sql-log:
+    enabled: true
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  cors:
+    allowed-origins:
+      - http://localhost:3000
+    allowed-methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - PATCH
+    allowed-headers:
+      - "*"
+
+mybatis:
+  mapper-locations: classpath*:com/api/schoollms/**/mapperxml/*.xml
+
+jwt:
+  secret-key: schoollms-secret-key-schoollms-secret-key
+  # secret-key >= 32 ký tự cho HS256
+  expiration-time: 3600000 # 1 hour (ms)

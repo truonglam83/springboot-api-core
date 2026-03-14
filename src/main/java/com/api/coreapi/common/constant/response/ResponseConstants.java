@@ -1,10 +1,9 @@
 package com.api.coreapi.common.constant.response;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public final class ResponseConstants {
-    private ResponseConstants() {
-    }
-
-
     // ===== SUCCESS =====
     public static final int SUCCESS_CODE = 2;
     public static final String SUCCESS_MSG = "Success";

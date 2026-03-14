@@ -28,7 +28,7 @@ spring:
       - "*"
 
 mybatis:
-  mapper-locations: classpath*:com/api/schoollms/**/mapperxml/*.xml
+  mapper-locations: classpath*:com/api/**/*.xml
 
 jwt:
   secret-key: schoollms-secret-key-schoollms-secret-key

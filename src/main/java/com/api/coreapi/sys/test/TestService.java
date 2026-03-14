@@ -1,30 +1,30 @@
 package com.api.coreapi.sys.test;
 
 import com.api.coreapi.common.constant.response.ResponseConstants;
-import com.api.coreapi.common.exception.UnauthorizedException;
-import com.api.coreapi.security.SessionUser;
+import com.api.coreapi.common.exception.BadRequestException;
+import com.api.coreapi.sys.test.dto.TestDbDto;
 import com.api.coreapi.sys.test.dto.TestResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
+@AllArgsConstructor
 public class TestService {
+    private final TestMapper testMapper;
 
     public TestResponse testJwt() {
         try {
-            SessionUser user = SessionUser.getCurrentUser();
-
             TestResponse response = new TestResponse();
             response.setCode(ResponseConstants.SUCCESS_CODE);
             response.setMessage(ResponseConstants.SUCCESS_MSG);
-
-            if (user != null) {
-                response.setUsername(user.getUsername());
-                response.setRole(user.getRole());
-            }
-
+            List<TestDbDto> list = testMapper.testDb();
+            response.setData(list);
             return response;
+
         } catch (Exception ex) {
-            throw new UnauthorizedException();
+            throw new BadRequestException();
         }
 
     }

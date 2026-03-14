@@ -34,3 +34,11 @@ jwt:
   secret-key: schoollms-secret-key-schoollms-secret-key
   # secret-key >= 32 ký tự cho HS256
   expiration-time: 3600000 # 1 hour (ms)
+
+llogging:
+  level:
+    org.apache.ibatis: TRACE
+    org.mybatis.spring: OFF
+    java.sql: DEBUG
+    java.sql.Statement: DEBUG
+    java.sql.PreparedStatement: DEBUG

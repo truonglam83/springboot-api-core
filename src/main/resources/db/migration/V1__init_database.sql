@@ -1,18 +1,9 @@
--- =============================
--- USER & AUTH
--- =============================
-
-CREATE TABLE users (
-                       id BIGSERIAL PRIMARY KEY,
-                       username VARCHAR(50) NOT NULL UNIQUE,
-                       password VARCHAR(255) NOT NULL,
-                       role VARCHAR(30) NOT NULL,
-                       status VARCHAR(20) DEFAULT 'ACTIVE',
-                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS test (
+    id BIGSERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_by BIGINT,
+    updated_by BIGINT,
+    is_deleted BOOLEAN NOT NULL DEFAULT FALSE
 );
-
--- =============================
--- INDEX
--- =============================
-CREATE INDEX idx_users_username ON users(username);

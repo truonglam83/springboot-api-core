@@ -19,7 +19,7 @@ public class AuthService {
 
         if (!"admin".equals(request.getUsername())
                 || !"123456".equals(request.getPassword())) {
-            response.setCode(ResponseConstants.UNAUTHORIZED_CODE);
+            response.setCode(ResponseConstants.AUTH_FAILED_CODE);
             response.setMessage(ResponseConstants.AUTH_FAILED_MSG);
             return response;
         }

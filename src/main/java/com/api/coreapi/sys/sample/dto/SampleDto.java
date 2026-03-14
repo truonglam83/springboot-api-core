@@ -1,9 +1,9 @@
-package com.api.coreapi.sys.test.dto;
+package com.api.coreapi.sys.sample.dto;
 
 import lombok.Data;
 
 @Data
-public class TestDbDto {
+public class SampleDto {
     private int id;
     private String username;
 }

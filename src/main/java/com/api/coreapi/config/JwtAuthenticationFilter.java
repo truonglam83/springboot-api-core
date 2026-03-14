@@ -7,11 +7,12 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import java.util.Collections;
+import java.util.List;
 
 
 @Component
@@ -30,27 +31,34 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws java.io.IOException, jakarta.servlet.ServletException {
 
         String authHeader = request.getHeader("Authorization");
+
         try {
+
             if (authHeader != null && authHeader.startsWith("Bearer ")) {
+
                 String token = authHeader.substring(7);
 
                 Claims claims = jwtUtil.parseToken(token);
 
-                SessionUser sessionUser = new SessionUser(
-                        claims.get("userId", Long.class),
-                        claims.getSubject(),
-                        claims.get("role", String.class)
-                );
+                Long userId = claims.get("userId", Long.class);
+                String username = claims.getSubject();
+                String role = claims.get("role", String.class);
+
+                SessionUser sessionUser =
+                        new SessionUser(userId, username, role);
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
                                 sessionUser,
                                 null,
-                                Collections.emptyList()
+                                List.of(new SimpleGrantedAuthority("ROLE_" + role))
                         );
 
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                if (SecurityContextHolder.getContext().getAuthentication() == null) {
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
             }
+
         } catch (Exception e) {
             SecurityContextHolder.clearContext();
         }

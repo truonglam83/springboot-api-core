@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.api.coreapi.sys.sample.SampleMapper">
+
+    <select id="countData">
+        SELECT COUNT(*)
+        FROM test
+        WHERE 1=1
+        <if test="username != null and username != ''">
+            AND username = #{username}
+        </if>
+    </select>
+
+    <select id="getData">
+        SELECT
+        id,
+        username
+        FROM test
+        WHERE 1=1
+        <if test="username != null and username != ''">
+            AND username = #{username}
+        </if>
+        ORDER BY id DESC
+        LIMIT #{size}
+        OFFSET #{offset}
+    </select>
+</mapper>

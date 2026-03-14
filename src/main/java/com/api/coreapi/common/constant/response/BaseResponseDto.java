@@ -12,5 +12,4 @@ import lombok.NoArgsConstructor;
 public class BaseResponseDto<T> {
     protected int code;
     protected String message;
-    private T data;
 }
